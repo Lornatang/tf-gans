@@ -35,7 +35,7 @@ The process reaches equilibrium when the discriminator can no longer distinguish
 
 The following animation shows a series of images produced by the generator as it was trained for 50 epochs. 
 The images begin as random noise, and increasingly resemble hand written digits over time.
-![](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/imgs/dcgan.gif)
+<div align=center>![](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/imgs/dcgan.gif)
 
 ## 1.Introduction
 
