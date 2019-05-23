@@ -44,7 +44,10 @@ if not os.path.exists(save_path):
 seed = tf.random.normal([num_examples_to_generate, noise_dim])
 
 # load dataset
-mnist_train_dataset, cifar_train_dataset = load_dataset()
+mnist_train_dataset, cifar_train_dataset = load_dataset(MNIST_SIZE,
+                                                        MNIST_BATCH_SIZE,
+                                                        CIFAR_SIZE,
+                                                        CIFAR_BATCH_SIZE)
 
 generator = make_generator_model()
 generator_optimizer = generator_optimizer()
@@ -58,6 +61,8 @@ checkpoint_dir, checkpoint, checkpoint_prefix = save_checkpoints(generator,
                                                                  discriminator_optimizer,
                                                                  save_path)
 
+if os.path.exists(save_path):
+  checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
 
 # This annotation causes the function to be "compiled".
 @tf.function
@@ -97,18 +102,11 @@ def train(dataset, epochs):
     epochs: number of iterative training.
 
   """
-  if not os.path.exists(save_path + '/' + 'checkpoint'):
-    checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
   for epoch in range(epochs):
     start = time.time()
-    i = 1
 
     for image_batch in dataset:
       train_step(image_batch)
-      print(f'Epoch [{epoch+1}/{epochs}] '
-            f'Step [{i*MNIST_BATCH_SIZE}/{MNIST_SIZE}] '
-            f'{i*MNIST_BATCH_SIZE / MNIST_SIZE * 100:.3f}%.')
-      i += 1
 
     # Produce images for the GIF as we go
     generate_and_save_images(generator,
@@ -117,7 +115,7 @@ def train(dataset, epochs):
                              save_path)
 
     # Save the model every 2 epochs
-    if (epoch + 1) % 2 == 0:
+    if (epoch + 1) % 15 == 0:
       checkpoint.save(file_prefix=checkpoint_prefix)
 
     print(f'Time for epoch {epoch+1} is {time.time()-start} sec.')
