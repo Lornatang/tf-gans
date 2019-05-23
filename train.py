@@ -29,32 +29,24 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', default='mnist', type=str,
-                    help='use dataset {mnist or cifar}')
+                    help='use dataset {mnist or cifar}.')
+parser.add_argument('--epochs', default=50, type=int,
+                    help='Epochs for training.')
 args = parser.parse_args()
 print(args)
 
-# define paras
-MNIST_SIZE = 60000
-CIFAR_SIZE = 50000
-MNIST_BATCH_SIZE = 128
-CIFAR_BATCH_SIZE = 64
-EPOCHS = 50
-noise_dim = 100
-num_examples_to_generate = 16
+# define model save path
 save_path = 'training_checkpoint'
 
 # create dir
 if not os.path.exists(save_path):
   os.makedirs(save_path)
 
-# define random seed
-seed = tf.random.normal([num_examples_to_generate, noise_dim])
+# define random noise
+noise = tf.random.normal([16, 100])
 
 # load dataset
-mnist_train_dataset, cifar_train_dataset = load_dataset(MNIST_SIZE,
-                                                        MNIST_BATCH_SIZE,
-                                                        CIFAR_SIZE,
-                                                        CIFAR_BATCH_SIZE)
+mnist_train_dataset, cifar_train_dataset = load_dataset(60000, 128, 50000, 64)
 
 # load network and optim paras
 generator = make_generator_model(args.dataset)
@@ -79,7 +71,6 @@ def train_step(images):
     images: input images.
 
   """
-  noise = tf.random.normal([MNIST_BATCH_SIZE, noise_dim])
   with tf.GradientTape() as gen_tape, tf.GradientTape() as disc_tape:
     generated_images = generator(noise, training=True)
 
@@ -117,7 +108,7 @@ def train(dataset, epochs):
     # Produce images for the GIF as we go
     generate_and_save_images(generator,
                              epoch + 1,
-                             seed,
+                             noise,
                              save_path)
 
     # Save the model every 15 epochs
@@ -129,12 +120,12 @@ def train(dataset, epochs):
   # Generate after the final epoch
   generate_and_save_images(generator,
                            epochs,
-                           seed,
+                           noise,
                            save_path)
 
 
 if __name__ == '__main__':
   if args.dataset == 'mnist':
-    train(mnist_train_dataset, EPOCHS)
+    train(mnist_train_dataset, args.epochs)
   else:
-    train(cifar_train_dataset, EPOCHS)
+    train(cifar_train_dataset, args.epochs)
