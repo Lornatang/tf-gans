@@ -26,9 +26,6 @@ import tensorflow as tf
 import time
 import os
 
-# I would like TensorFlow to automatically choose an existing and supported
-# device to run the operations in case the specified one doesn't exist.
-tf.config.set_soft_device_placement(True)
 # Enabling device placement logging causes any Tensor allocations or operations
 # to be printed.
 tf.debugging.set_log_device_placement(True)
@@ -40,7 +37,7 @@ CIFAR_SIZE = 50000
 MNIST_BATCH_SIZE = 128
 CIFAR_BATCH_SIZE = 64
 EPOCHS = 50
-noise_dim = 100
+noise_dim = 128
 num_examples_to_generate = 16
 save_path = 'training_checkpoint'
 
