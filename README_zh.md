@@ -22,6 +22,20 @@
 pip install -r requirements.txt
 ```
 
+# GAN是什么?
+生成对抗网络(GANs)是当今计算机科学中最有趣的概念之一。
+两个模型通过对抗性过程同时训练。
+生成器(“艺术家”)学会创建看起来真实的图像，而鉴别器(“艺术评论家”)学会区分真实图像和赝品。
+![](https://tensorflow.org/alpha/tutorials/generative/images/gan1.png)
+
+在训练过程中，生成器逐渐变得更擅长创建看起来真实的图像，而鉴别器则变得更擅长区分它们。
+当鉴别器无法分辨真伪图像时，该过程达到平衡。
+![](https://tensorflow.org/alpha/tutorials/generative/images/gan2.png)
+
+下面的动画展示了生成器在经过50个时代的训练后生成的一系列图像。
+这些图像一开始是随机噪声，随着时间的推移越来越像手写数字。
+![](https://tensorflow.org/images/gan/dcgan.gif)
+
 ## 1.介绍
 
 ### 1.1 原理
