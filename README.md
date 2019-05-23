@@ -22,6 +22,21 @@
 pip install -r requirements.txt
 ```
 
+# What are GANs?
+
+Generative Adversarial Networks (GANs) are one of the most interesting ideas in computer science today. 
+Two models are trained simultaneously by an adversarial process. 
+A generator ("the artist") learns to create images that look real, while a discriminator ("the art critic") learns to tell real images apart from fakes.
+![](https://tensorflow.org/alpha/tutorials/generative/images/gan1.png)
+
+During training, the generator progressively becomes better at creating images that look real, while the discriminator becomes better at telling them apart. 
+The process reaches equilibrium when the discriminator can no longer distinguish real images from fakes.
+![](https://tensorflow.org/alpha/tutorials/generative/images/gan2.png)
+
+The following animation shows a series of images produced by the generator as it was trained for 50 epochs. 
+The images begin as random noise, and increasingly resemble hand written digits over time.
+![](https://tensorflow.org/images/gan/dcgan.gif)
+
 ## 1.Introduction
 
 ### 1.1 Theory
