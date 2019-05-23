@@ -21,9 +21,9 @@ def make_discriminator_model():
     model.
 
   """
-  model = tf.keras.models.Sequential()
+  model = tf.python.keras.models.Sequential()
   model.add(
-    layers.Dense(1024, input_dim=784, kernel_initializer=tf.contrib.keras.initializers.RandomNormal(stddev=0.02)))
+    layers.Dense(1024, input_dim=784, kernel_initializer=tf.python.keras.initializers.RandomNormal(stddev=0.02)))
   model.add(layers.LeakyReLU(0.2))
   model.add(layers.Dropout(0.3))
 
