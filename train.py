@@ -27,8 +27,8 @@ import os
 # define paras
 MNIST_SIZE = 60000
 CIFAR_SIZE = 50000
-MNIST_BATCH_SIZE = 256
-CIFAR_BATCH_SIZE = 128
+MNIST_BATCH_SIZE = 128
+CIFAR_BATCH_SIZE = 64
 EPOCHS = 50
 noise_dim = 100
 num_examples_to_generate = 16
