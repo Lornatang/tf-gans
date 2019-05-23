@@ -50,11 +50,11 @@ generator_optimizer = generator_optimizer()
 discriminator = make_discriminator_model()
 discriminator_optimizer = discriminator_optimizer()
 
-checkpoint_dir, checkpoint, checkpoint_prefix = save_checkpoints(generator,
-                                                                 discriminator,
-                                                                 generator_optimizer,
-                                                                 discriminator_optimizer,
-                                                                 save_path)
+# checkpoint_dir, checkpoint, checkpoint_prefix = save_checkpoints(generator,
+#                                                                  discriminator,
+#                                                                  generator_optimizer,
+#                                                                  discriminator_optimizer,
+#                                                                  save_path)
 
 
 # This annotation causes the function to be "compiled".
@@ -91,8 +91,8 @@ def train(dataset, epochs):
     epochs: number of iterative training.
 
   """
-  if not os.path.exists(save_path + '/' + 'checkpoint'):
-    checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
+  # if not os.path.exists(save_path + '/' + 'checkpoint'):
+  #   checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
   for epoch in range(epochs):
     start = time.time()
     i = 1
