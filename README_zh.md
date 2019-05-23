@@ -40,7 +40,7 @@ pip install -r requirements.txt
 
 ### 1.1 原理
 这是一张关于GAN的流程图
-<div align=center>![GAN](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/imgs/GAN.png)
+![GAN](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/imgs/GAN.png)
 
 GAN主要的灵感来源是零和游戏在博弈论思想,应用于深学习神经网络,是*通过生成网络G(发电机)和判别D(鉴频器)网络游戏不断,从而使G*学习数据分布,如果用在图像生成训练完成后,G可以从一个随机数生成逼真的图像。
 G和D的主要功能是:
