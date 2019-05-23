@@ -26,10 +26,6 @@ import tensorflow as tf
 import time
 import os
 
-# Enabling device placement logging causes any Tensor allocations or operations
-# to be printed.
-tf.debugging.set_log_device_placement(True)
-
 
 # define paras
 MNIST_SIZE = 60000
@@ -54,6 +50,7 @@ mnist_train_dataset, cifar_train_dataset = load_dataset(MNIST_SIZE,
                                                         CIFAR_SIZE,
                                                         CIFAR_BATCH_SIZE)
 
+# load network and optim paras
 generator = make_generator_model(noise_dim)
 generator_optimizer = generator_optimizer()
 
