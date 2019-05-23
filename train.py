@@ -110,8 +110,8 @@ def train(dataset, epochs):
                              save_path)
 
     # Save the model every 2 epochs
-    if (epoch + 1) % 2 == 0:
-      checkpoint.save(file_prefix=checkpoint_prefix)
+    # if (epoch + 1) % 2 == 0:
+    #   checkpoint.save(file_prefix=checkpoint_prefix)
 
     print(f'Time for epoch {epoch+1} is {time.time()-start} sec.')
 
