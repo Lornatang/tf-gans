@@ -25,7 +25,13 @@ from util.generate_and_save_images import generate_and_save_images
 import tensorflow as tf
 import time
 import os
+import argparse
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--dataset', default='mnist', type=str,
+                    help='use dataset {mnist or cifar}')
+args = parser.parse_args()
+print(args)
 
 # define paras
 MNIST_SIZE = 60000
@@ -51,10 +57,10 @@ mnist_train_dataset, cifar_train_dataset = load_dataset(MNIST_SIZE,
                                                         CIFAR_BATCH_SIZE)
 
 # load network and optim paras
-generator = make_generator_model(noise_dim)
+generator = make_generator_model(args.dataset)
 generator_optimizer = generator_optimizer()
 
-discriminator = make_discriminator_model()
+discriminator = make_discriminator_model(args.dataset)
 discriminator_optimizer = discriminator_optimizer()
 
 checkpoint_dir, checkpoint, checkpoint_prefix = save_checkpoints(generator,
@@ -128,4 +134,8 @@ def train(dataset, epochs):
 
 
 if __name__ == '__main__':
-  train(mnist_train_dataset, EPOCHS)
+  checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
+  if args.dataset == 'mnist':
+    train(mnist_train_dataset, EPOCHS)
+  else:
+    train(cifar_train_dataset, EPOCHS)

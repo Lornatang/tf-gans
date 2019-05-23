@@ -12,15 +12,21 @@ import tensorflow as tf
 from tensorflow.python.keras import layers
 
 
-def make_discriminator_model():
+def make_discriminator_model(dataset='mnist'):
   """ implements discriminate.
+
+  Args:
+    dataset: mnist or cifar10 dataset. (default='mnist'). choice{'mnist', 'cifar'}.
 
   Returns:
     model.
 
   """
   model = tf.keras.models.Sequential()
-  model.add(layers.Flatten(input_shape=[28, 28, 1]))
+  if dataset == 'mnist':
+    model.add(layers.Flatten(input_shape=[28, 28, 1]))
+  elif dataset == 'cifar':
+    model.add(layers.Flatten(input_shape=[32, 32, 3]))
 
   model.add(layers.Dense(1024))
   model.add(layers.LeakyReLU(alpha=0.2))

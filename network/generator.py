@@ -12,18 +12,18 @@ import tensorflow as tf
 from tensorflow.python.keras import layers
 
 
-def make_generator_model(z):
+def make_generator_model(dataset='mnist'):
   """ implements generate.
 
   Args:
-    z: noise.
+    dataset: mnist or cifar10 dataset. (default='mnist'). choice{'mnist', 'cifar'}.
 
   Returns:
     model.
 
   """
   model = tf.keras.models.Sequential()
-  model.add(layers.Dense(256, input_dim=z))
+  model.add(layers.Dense(256, input_dim=128))
   model.add(layers.LeakyReLU(alpha=0.2))
 
   model.add(layers.Dense(512))
@@ -34,7 +34,11 @@ def make_generator_model(z):
   model.add(layers.BatchNormalization())
   model.add(layers.LeakyReLU(alpha=0.2))
 
-  model.add(layers.Dense(28 * 28 * 1, activation='tanh'))
-  model.add(layers.Reshape((28, 28, 1)))
+  if dataset == 'mnist':
+    model.add(layers.Dense(28 * 28 * 1, activation='tanh'))
+    model.add(layers.Reshape((28, 28, 1)))
+  elif dataset == 'cifar':
+    model.add(layers.Dense(32 * 32 * 3, activation='tanh'))
+    model.add(layers.Reshape((32, 32, 3)))
 
   return model
