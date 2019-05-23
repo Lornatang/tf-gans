@@ -4,9 +4,23 @@
 
 **Author: [Lorna](https://github.com/Lornatang)**
 
-**Email: [shiyipaisizuo@gmail.com](shiyipaisizuo@gmail.com)**
+**Email: [shiyipaisizuo@gmail.com]()**
 
 [Chinese version](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/README_zh.md)
+
+**Requirements**
+
+- GPU: A TiTAN V or later.
+- Disk: 128G SSD.
+- Python version: python3.5 or later.
+- CUDA: cuda10.
+- CUDNN: cudnn7.4.5 or later.
+- Tensorflow-gpu: 2.0.0-alpla0.
+
+*Run this command.*
+```text
+pip install -r requirements.txt
+```
 
 ## 1.Introduction
 
@@ -508,6 +522,10 @@ But if one G generated samples may not be true, but D gives the correct evaluati
 
 - At present, GAN is an interesting application in **image style transfer, image noise reduction and restoration, and image super resolution, all of which have good results.**
 
+
+## TODO
+- Write metrics code.
+- Create GIF.
 
 # Reference
 [Sakura55](https://blog.csdn.net/Sakura55/article/details/81512600)
