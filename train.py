@@ -134,7 +134,6 @@ def train(dataset, epochs):
 
 
 if __name__ == '__main__':
-  checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
   if args.dataset == 'mnist':
     train(mnist_train_dataset, EPOCHS)
   else:
