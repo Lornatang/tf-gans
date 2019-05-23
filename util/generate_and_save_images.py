@@ -35,5 +35,5 @@ def generate_and_save_images(model, epoch, seed, save_path):
     plt.axis('off')
 
   plt.savefig(save_path + '/' + f'{epoch:04d}.png')
-  plt.show()
+  # plt.show()
   plt.close(fig)
