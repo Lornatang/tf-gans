@@ -11,8 +11,6 @@
 import tensorflow as tf
 from tensorflow.python.keras import layers
 
-DIM = 100
-
 
 def make_discriminator_model():
   """ implements discriminate.
@@ -22,14 +20,17 @@ def make_discriminator_model():
 
   """
   model = tf.keras.models.Sequential()
-  model.add(layers.Flatten())
+  model.add(layers.Flatten(input_shape=[28, 28, 1]))
+
+  model.add(layers.Dense(1024))
+  model.add(layers.LeakyReLU(alpha=0.2))
 
   model.add(layers.Dense(512))
-  model.add(layers.LeakyReLU())
+  model.add(layers.LeakyReLU(alpha=0.2))
 
   model.add(layers.Dense(256))
-  model.add(layers.LeakyReLU())
+  model.add(layers.LeakyReLU(alpha=0.2))
 
-  model.add(layers.Dense(1, activation=tf.nn.sigmoid))
+  model.add(layers.Dense(1, activation='sigmoid'))
 
   return model

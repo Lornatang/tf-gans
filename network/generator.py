@@ -24,17 +24,17 @@ def make_generator_model(z):
   """
   model = tf.keras.models.Sequential()
   model.add(layers.Dense(256, input_dim=z))
-  model.add(layers.LeakyReLU())
+  model.add(layers.LeakyReLU(alpha=0.2))
 
   model.add(layers.Dense(512))
-  # model.add(layers.BatchNormalization())
-  model.add(layers.LeakyReLU())
+  model.add(layers.BatchNormalization())
+  model.add(layers.LeakyReLU(alpha=0.2))
 
   model.add(layers.Dense(1024))
-  # model.add(layers.BatchNormalization())
-  model.add(layers.LeakyReLU())
+  model.add(layers.BatchNormalization())
+  model.add(layers.LeakyReLU(alpha=0.2))
 
-  model.add(layers.Dense(28 * 28 * 1, activation=tf.nn.tanh))
+  model.add(layers.Dense(28 * 28 * 1, activation='tanh'))
   model.add(layers.Reshape((28, 28, 1)))
 
   return model
