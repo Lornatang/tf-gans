@@ -27,11 +27,11 @@ def make_generator_model(z):
   model.add(layers.LeakyReLU())
 
   model.add(layers.Dense(512))
-  model.add(layers.BatchNormalization())
+  # model.add(layers.BatchNormalization())
   model.add(layers.LeakyReLU())
 
   model.add(layers.Dense(1024))
-  model.add(layers.BatchNormalization())
+  # model.add(layers.BatchNormalization())
   model.add(layers.LeakyReLU())
 
   model.add(layers.Dense(28 * 28 * 1, activation=tf.nn.tanh))
