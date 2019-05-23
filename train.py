@@ -2,7 +2,7 @@
 #
 #           Licensed under the MIT License.
 # you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at 
+# You may obtain a copy of the License at
 #         https://opensource.org/licenses/MIT
 # ==============================================================================
 
@@ -23,16 +23,20 @@ from util.generate_and_save_images import generate_and_save_images
 import tensorflow as tf
 import time
 import os
+from IPython import display
 
 # define paras
-BATCH_SIZE = 256
+MNIST_SIZE = 60000
+CIFAR_SIZE = 50000
+MNIST_BATCH_SIZE = 256
+CIFAR_BATCH_SIZE = 128
 EPOCHS = 100
 noise_dim = 100
 num_examples_to_generate = 16
 save_path = 'training_checkpoint'
 
 # create dir
-if not os.path.isdir(save_path):
+if not os.path.exists(save_path):
   os.makedirs(save_path)
 
 # define random seed
@@ -47,25 +51,23 @@ generator_optimizer = generator_optimizer()
 discriminator = make_discriminator_model()
 discriminator_optimizer = discriminator_optimizer()
 
-checkpoint, checkpoint_prefix = save_checkpoints(generator,
-                                                 discriminator,
-                                                 generator_optimizer,
-                                                 discriminator_optimizer,
-                                                 save_path)
+checkpoint_dir, checkpoint, checkpoint_prefix = save_checkpoints(generator,
+                                                                 discriminator,
+                                                                 generator_optimizer,
+                                                                 discriminator_optimizer,
+                                                                 save_path)
 
 
 # This annotation causes the function to be "compiled".
+@tf.function
 def train_step(images):
   """ break it down into training steps.
 
   Args:
     images: input images.
 
-  Returns:
-    none
-
   """
-  noise = tf.random.normal([BATCH_SIZE, noise_dim])
+  noise = tf.random.normal([MNIST_BATCH_SIZE, noise_dim])
   with tf.GradientTape() as gen_tape, tf.GradientTape() as disc_tape:
     generated_images = generator(noise, training=True)
 
@@ -89,10 +91,9 @@ def train(dataset, epochs):
     dataset: mnist dataset or cifar10 dataset.
     epochs: number of iterative training.
 
-  Returns:
-    none
-
   """
+  if not os.path.exists(save_path + '/' + 'checkpoint'):
+    checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
   for epoch in range(epochs):
     start = time.time()
 
@@ -100,18 +101,20 @@ def train(dataset, epochs):
       train_step(image_batch)
 
     # Produce images for the GIF as we go
+    display.clear_output(wait=True)
     generate_and_save_images(generator,
                              epoch + 1,
                              seed,
                              save_path)
 
-    # Save the model every 15 epochs
-    if (epoch + 1) % 15 == 0:
+    # Save the model every 2 epochs
+    if (epoch + 1) % 2 == 0:
       checkpoint.save(file_prefix=checkpoint_prefix)
 
-    print(f'Time for epoch {epoch+1} is {time.time()-start} sec')
+    print(f'Time for epoch {epoch+1} is {time.time()-start} sec.')
 
   # Generate after the final epoch
+  display.clear_output(wait=True)
   generate_and_save_images(generator,
                            epochs,
                            seed,
