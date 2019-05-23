@@ -2,7 +2,7 @@
 
 **[论文](https://arxiv.org/pdf/1406.2661v1.pdf)**
 
-**作者: [Lorna](https://github.com/Lornatang)**
+**作者: [Lorna](https://github.com/Lornatang/Generative-Adversarial-Networks)**
 
 **邮箱: [shiyipaisizuo@gmail.com]()**
 
