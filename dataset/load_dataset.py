@@ -9,10 +9,13 @@
 """load mnist or cifar10 dataset"""
 
 import tensorflow as tf
+import keras.datasets
 
 # define parameters
-BUFFER_SIZE = 60000
-BATCH_SIZE = 256
+MNIST_SIZE = 60000
+MNIST_BATCH_SIZE = 256
+CIFAR_SIZE = 50000
+CIFAR_BATCH_SIZE = 128
 
 
 def load_dataset():
@@ -35,7 +38,10 @@ def load_dataset():
   cifar_train_images = (cifar_train_images - 127.5) / 127.5  # Normalize the images to [-1, 1]
 
   # Batch and shuffle the data
-  mnist_train_dataset = tf.data.Dataset.from_tensor_slices(mnist_train_images).shuffle(BUFFER_SIZE).batch(BATCH_SIZE)
-  cifar_train_dataset = tf.data.Dataset.from_tensor_slices(cifar_train_images).shuffle(BUFFER_SIZE).batch(BATCH_SIZE)
+  mnist_train_dataset = tf.data.Dataset.from_tensor_slices(mnist_train_images)
+  mnist_train_dataset = mnist_train_dataset.shuffle(MNIST_SIZE).batch(MNIST_BATCH_SIZE)
+
+  cifar_train_dataset = tf.data.Dataset.from_tensor_slices(cifar_train_images)
+  cifar_train_dataset = cifar_train_dataset.shuffle(CIFAR_SIZE).batch(CIFAR_BATCH_SIZE)
 
   return mnist_train_dataset, cifar_train_dataset
