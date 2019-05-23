@@ -26,8 +26,11 @@ def save_checkpoints(generator, discriminator, generator_optimizer, discriminato
     none
 
   """
-  os.path.join(save_path, 'ckpt')
-  tf.train.Checkpoint(generator_optimizer=generator_optimizer,
-                      discriminator_optimizer=discriminator_optimizer,
-                      generator=generator,
-                      discriminator=discriminator)
+  checkpoint_dir = save_path
+  checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
+  checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer,
+                                   discriminator_optimizer=discriminator_optimizer,
+                                   generator=generator,
+                                   discriminator=discriminator)
+
+  return checkpoint, checkpoint_prefix

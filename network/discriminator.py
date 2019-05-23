@@ -9,19 +9,19 @@
 """model of discriminator"""
 
 import tensorflow as tf
-from tensorflow.contrib.keras import layers
+from tensorflow.python.keras import layers
 
 DIM = 100
 
 
-def generator():
+def make_discriminator_model():
   """ implements discriminate.
 
   Returns:
     model.
 
   """
-  model = tf.contrib.keras.models.Sequential()
+  model = tf.keras.models.Sequential()
   model.add(
     layers.Dense(1024, input_dim=784, kernel_initializer=tf.contrib.keras.initializers.RandomNormal(stddev=0.02)))
   model.add(layers.LeakyReLU(0.2))
@@ -36,3 +36,5 @@ def generator():
   model.add(layers.Dropout(0.3))
 
   model.add(layers.Dense(1, activation='sigmoid'))
+
+  return model

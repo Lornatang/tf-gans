@@ -9,12 +9,12 @@
 """model of generate"""
 
 import tensorflow as tf
-from tensorflow.contrib.keras import layers
+from tensorflow.python.keras import layers
 
 DIM = 100
 
 
-def generator():
+def make_generator_model():
   """ implements generate.
 
   Returns:
@@ -33,3 +33,5 @@ def generator():
   model.add(layers.LeakyReLU(0.2))
 
   model.add(layers.Dense(784, activation='tanh'))
+
+  return model
