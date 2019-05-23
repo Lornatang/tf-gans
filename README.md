@@ -27,21 +27,21 @@ pip install -r requirements.txt
 Generative Adversarial Networks (GANs) are one of the most interesting ideas in computer science today. 
 Two models are trained simultaneously by an adversarial process. 
 A generator ("the artist") learns to create images that look real, while a discriminator ("the art critic") learns to tell real images apart from fakes.
-![](https://tensorflow.org/alpha/tutorials/generative/images/gan1.png)
+![](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/imgs/intro.png)
 
 During training, the generator progressively becomes better at creating images that look real, while the discriminator becomes better at telling them apart. 
 The process reaches equilibrium when the discriminator can no longer distinguish real images from fakes.
-![](https://tensorflow.org/alpha/tutorials/generative/images/gan2.png)
+![](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/imgs/train.png)
 
 The following animation shows a series of images produced by the generator as it was trained for 50 epochs. 
 The images begin as random noise, and increasingly resemble hand written digits over time.
-![](https://tensorflow.org/images/gan/dcgan.gif)
+![](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/imgs/dcgan.gif)
 
 ## 1.Introduction
 
 ### 1.1 Theory
 This is the flow chart of GAN.
-![GAN](https://img-blog.csdn.net/20180808175629648)
+![GAN](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/imgs/GAN.png)
 
 GAN's main source of inspiration is zero-sum game thoughts in game theory, is applied to the deep learning neural network, is the **by generating network G (Generator) and discriminant D (Discriminator) network game constantly, thus make G** learn data distribution, if used on the image to generate the training is completed, G can generate lifelike image from a random number. 
 The main functions of G and D are:

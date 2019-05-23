@@ -26,21 +26,21 @@ pip install -r requirements.txt
 生成对抗网络(GANs)是当今计算机科学中最有趣的概念之一。
 两个模型通过对抗性过程同时训练。
 生成器(“艺术家”)学会创建看起来真实的图像，而鉴别器(“艺术评论家”)学会区分真实图像和赝品。
-![](https://tensorflow.org/alpha/tutorials/generative/images/gan1.png)
+![](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/imgs/intro.png)
 
 在训练过程中，生成器逐渐变得更擅长创建看起来真实的图像，而鉴别器则变得更擅长区分它们。
 当鉴别器无法分辨真伪图像时，该过程达到平衡。
-![](https://tensorflow.org/alpha/tutorials/generative/images/gan2.png)
+![](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/imgs/train.png)
 
 下面的动画展示了生成器在经过50个时代的训练后生成的一系列图像。
 这些图像一开始是随机噪声，随着时间的推移越来越像手写数字。
-![](https://tensorflow.org/images/gan/dcgan.gif)
+![](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/imgs/dcgan.gif)
 
 ## 1.介绍
 
 ### 1.1 原理
 这是一张关于GAN的流程图
-![GAN](https://img-blog.csdn.net/20180808175629648)
+![GAN](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/imgs/GAN.png)
 
 GAN主要的灵感来源是零和游戏在博弈论思想,应用于深学习神经网络,是*通过生成网络G(发电机)和判别D(鉴频器)网络游戏不断,从而使G*学习数据分布,如果用在图像生成训练完成后,G可以从一个随机数生成逼真的图像。
 G和D的主要功能是:
