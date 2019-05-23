@@ -26,6 +26,14 @@ import tensorflow as tf
 import time
 import os
 
+# I would like TensorFlow to automatically choose an existing and supported
+# device to run the operations in case the specified one doesn't exist.
+tf.config.set_soft_device_placement(True)
+# Enabling device placement logging causes any Tensor allocations or operations
+# to be printed.
+tf.debugging.set_log_device_placement(True)
+
+
 # define paras
 MNIST_SIZE = 60000
 CIFAR_SIZE = 50000
@@ -61,8 +69,6 @@ checkpoint_dir, checkpoint, checkpoint_prefix = save_checkpoints(generator,
                                                                  discriminator_optimizer,
                                                                  save_path)
 
-if os.path.exists(save_path):
-  checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
 
 # This annotation causes the function to be "compiled".
 @tf.function
@@ -114,11 +120,11 @@ def train(dataset, epochs):
                              seed,
                              save_path)
 
-    # Save the model every 2 epochs
+    # Save the model every 15 epochs
     if (epoch + 1) % 15 == 0:
       checkpoint.save(file_prefix=checkpoint_prefix)
 
-    print(f'Time for epoch {epoch+1} is {time.time()-start} sec.')
+    print(f'Time for epoch {epoch+1} is {time.time()-start:.3f} sec.')
 
   # Generate after the final epoch
   generate_and_save_images(generator,

@@ -39,7 +39,7 @@ def discriminator_loss(real_output, fake_output):
     fake_output: generate pic.
 
   Returns:
-    loss
+    real loss + fake loss
 
   """
   real_loss = cross_entropy(tf.ones_like(real_output), real_output)
