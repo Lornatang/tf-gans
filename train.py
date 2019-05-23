@@ -23,14 +23,13 @@ from util.generate_and_save_images import generate_and_save_images
 import tensorflow as tf
 import time
 import os
-from IPython import display
 
 # define paras
 MNIST_SIZE = 60000
 CIFAR_SIZE = 50000
 MNIST_BATCH_SIZE = 256
 CIFAR_BATCH_SIZE = 128
-EPOCHS = 100
+EPOCHS = 50
 noise_dim = 100
 num_examples_to_generate = 16
 save_path = 'training_checkpoint'
@@ -96,12 +95,15 @@ def train(dataset, epochs):
     checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
   for epoch in range(epochs):
     start = time.time()
+    i = 1
 
     for image_batch in dataset:
       train_step(image_batch)
+      print(f'Epoch [{epoch+1}/{epochs}] '
+            f'Step [{i*MNIST_BATCH_SIZE}/{MNIST_SIZE}] {i*MNIST_BATCH_SIZE / MNIST_SIZE * 100:.3f}%.')
+      i += 1
 
     # Produce images for the GIF as we go
-    display.clear_output(wait=True)
     generate_and_save_images(generator,
                              epoch + 1,
                              seed,
@@ -114,7 +116,6 @@ def train(dataset, epochs):
     print(f'Time for epoch {epoch+1} is {time.time()-start} sec.')
 
   # Generate after the final epoch
-  display.clear_output(wait=True)
   generate_and_save_images(generator,
                            epochs,
                            seed,
