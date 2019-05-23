@@ -23,7 +23,7 @@ def make_generator_model(dataset='mnist'):
 
   """
   model = tf.keras.models.Sequential()
-  model.add(layers.Dense(256, input_dim=128))
+  model.add(layers.Dense(256, input_dim=100))
   model.add(layers.LeakyReLU(alpha=0.2))
 
   model.add(layers.Dense(512))

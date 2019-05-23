@@ -39,7 +39,7 @@ CIFAR_SIZE = 50000
 MNIST_BATCH_SIZE = 128
 CIFAR_BATCH_SIZE = 64
 EPOCHS = 50
-noise_dim = 128
+noise_dim = 100
 num_examples_to_generate = 16
 save_path = 'training_checkpoint'
 
