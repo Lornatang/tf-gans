@@ -9,7 +9,6 @@
 """load mnist or cifar10 dataset"""
 
 import tensorflow as tf
-import tensorflow.contrib
 
 # define parameters
 BUFFER_SIZE = 60000
@@ -24,10 +23,10 @@ def load_dataset():
 
   """
   # load mnist data
-  (mnist_train_images, mnist_train_labels), (_, _) = tf.contrib.keras.datasets.mnist.load_data()
+  (mnist_train_images, mnist_train_labels), (_, _) = tf.keras.datasets.mnist.load_data()
 
   # load cifar10 data
-  (cifar_train_images, cifar_train_labels), (_, _) = tf.contrib.keras.datasets.cifar10.load_data()
+  (cifar_train_images, cifar_train_labels), (_, _) = tf.keras.datasets.cifar10.load_data()
 
   mnist_train_images = mnist_train_images.reshape(mnist_train_images.shape[0], 28, 28, 1).astype('float32')
   mnist_train_images = (mnist_train_images - 127.5) / 127.5  # Normalize the images to [-1, 1]
