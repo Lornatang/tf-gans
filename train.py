@@ -7,8 +7,9 @@
 # ==============================================================================
 
 """The training loop begins with generator receiving a random seed as input.
-   That seed is used to produce an image. The discriminator is then used to classify real images
-   (drawn from the training set) and fakes images (produced by the generator).
+   That seed is used to produce an image.
+   The discriminator is then used to classify real images (drawn from the training set)
+   and fakes images (produced by the generator).
    The loss is calculated for each of these models,
    and the gradients are used to update the generator and discriminator.
 """
@@ -16,7 +17,8 @@
 from dataset.load_dataset import load_dataset
 from network.generator import make_generator_model
 from network.discriminator import make_discriminator_model
-from util.loss_and_optim import generator_loss, generator_optimizer, discriminator_loss, discriminator_optimizer
+from util.loss_and_optim import generator_loss, generator_optimizer
+from util.loss_and_optim import discriminator_loss, discriminator_optimizer
 from util.save_checkpoints import save_checkpoints
 from util.generate_and_save_images import generate_and_save_images
 
@@ -76,11 +78,15 @@ def train_step(images):
     gen_loss = generator_loss(fake_output)
     disc_loss = discriminator_loss(real_output, fake_output)
 
-  gradients_of_generator = gen_tape.gradient(gen_loss, generator.trainable_variables)
-  gradients_of_discriminator = disc_tape.gradient(disc_loss, discriminator.trainable_variables)
+  gradients_of_generator = gen_tape.gradient(gen_loss,
+                                             generator.trainable_variables)
+  gradients_of_discriminator = disc_tape.gradient(disc_loss,
+                                                  discriminator.trainable_variables)
 
-  generator_optimizer.apply_gradients(zip(gradients_of_generator, generator.trainable_variables))
-  discriminator_optimizer.apply_gradients(zip(gradients_of_discriminator, discriminator.trainable_variables))
+  generator_optimizer.apply_gradients(
+    zip(gradients_of_generator, generator.trainable_variables))
+  discriminator_optimizer.apply_gradients(
+    zip(gradients_of_discriminator, discriminator.trainable_variables))
 
 
 def train(dataset, epochs):
@@ -100,7 +106,8 @@ def train(dataset, epochs):
     for image_batch in dataset:
       train_step(image_batch)
       print(f'Epoch [{epoch+1}/{epochs}] '
-            f'Step [{i*MNIST_BATCH_SIZE}/{MNIST_SIZE}] {i*MNIST_BATCH_SIZE / MNIST_SIZE * 100:.3f}%.')
+            f'Step [{i*MNIST_BATCH_SIZE}/{MNIST_SIZE}] '
+            f'{i*MNIST_BATCH_SIZE / MNIST_SIZE * 100:.3f}%.')
       i += 1
 
     # Produce images for the GIF as we go
