@@ -34,6 +34,7 @@ pip install -r requirements.txt
 
 下面的动画展示了生成器在经过50个时代的训练后生成的一系列图像。
 这些图像一开始是随机噪声，随着时间的推移越来越像手写数字。
+
 ![](https://github.com/Lornatang/Generative-Adversarial-Networks/blob/master/imgs/dcgan.gif)
 
 ## 1.介绍
