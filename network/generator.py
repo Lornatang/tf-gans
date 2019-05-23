@@ -12,15 +12,18 @@ import tensorflow as tf
 from tensorflow.python.keras import layers
 
 
-def make_generator_model():
+def make_generator_model(z):
   """ implements generate.
+
+  Args:
+    z: noise.
 
   Returns:
     model.
 
   """
   model = tf.keras.models.Sequential()
-  model.add(layers.Dense(256, input_dim=100))
+  model.add(layers.Dense(256, input_dim=z))
   model.add(layers.LeakyReLU())
 
   model.add(layers.Dense(512))

@@ -54,7 +54,7 @@ mnist_train_dataset, cifar_train_dataset = load_dataset(MNIST_SIZE,
                                                         CIFAR_SIZE,
                                                         CIFAR_BATCH_SIZE)
 
-generator = make_generator_model()
+generator = make_generator_model(noise_dim)
 generator_optimizer = generator_optimizer()
 
 discriminator = make_discriminator_model()
