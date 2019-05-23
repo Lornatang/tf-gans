@@ -13,7 +13,7 @@ from matplotlib import pyplot as plt
 
 def generate_and_save_images(model, epoch, seed, save_path):
   """make sure the training parameter is set to False because we
-     don't want to train the batchnorm layer when doing inference.
+     don't want to train the batch-norm layer when doing inference.
 
   Args:
     model: generate model.
@@ -25,15 +25,15 @@ def generate_and_save_images(model, epoch, seed, save_path):
     none.
 
   """
-  predictions = model(seed, trainning=False)
+  predictions = model(seed, training=False)
 
   fig = plt.figure(figsize=(4, 4))
 
   for i in range(predictions.shape[0]):
-    plt.subplot(4, 4, i+1)
-    plt.imshow(predictions[i, :, :, 0] * 127.5 + 127.5, cmap='gary')
+    plt.subplot(4, 4, i + 1)
+    plt.imshow(predictions[i, :, :, 0] * 127.5 + 127.5, cmap='gray')
     plt.axis('off')
 
-  plt.savefig(save_path + f'{epoch:04d}.png')
+  plt.savefig(save_path + '/' + f'{epoch:04d}.png')
   plt.show()
   plt.close(fig)
