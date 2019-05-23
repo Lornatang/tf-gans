@@ -23,7 +23,7 @@ def save_checkpoints(generator, discriminator, generator_optimizer, discriminato
     save_path: save gan model dir path.
 
   Returns:
-    none
+    checkpoint path
 
   """
   checkpoint_dir = save_path
@@ -33,4 +33,4 @@ def save_checkpoints(generator, discriminator, generator_optimizer, discriminato
                                    generator=generator,
                                    discriminator=discriminator)
 
-  return checkpoint, checkpoint_prefix
+  return checkpoint_dir, checkpoint, checkpoint_prefix
