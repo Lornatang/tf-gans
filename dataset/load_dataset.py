@@ -9,7 +9,6 @@
 """load mnist or cifar10 dataset"""
 
 import tensorflow as tf
-import keras.datasets
 
 # define parameters
 MNIST_SIZE = 60000
