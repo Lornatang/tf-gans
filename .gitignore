@@ -116,3 +116,6 @@ dmypy.json
 # sys file
 .idea/
 .DS_Store
+
+# model file
+training_checkpoint/
